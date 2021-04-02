@@ -48,32 +48,4 @@ namespace ModularBehaviourTree
 
         public void Terminate(Context context) {}
     }
-
-    public class OneIterator : IBehaviour
-    {
-        protected Node node;
-        public OneIterator(Node node) { this.node = node; }
-
-        public void           Initialise(Context context) => node.Initialise(context);
-        public Node.NodeState Tick(Context       context) => node.Tick(context);
-        public void           Terminate(Context  context) => node.Terminate(context);
-    }
-
-    public interface IBehaviour
-    {
-        /// <summary>
-        ///     Call once immediately before first tick.
-        /// </summary>
-        public void Initialise(Context context);
-
-        /// <summary>
-        ///     Called exactly once each tree tick until returns Failure or Success.
-        /// </summary>
-        public Node.NodeState Tick(Context context);
-
-        /// <summary>
-        ///     Called once immediately after Tick returns Failure or Success.
-        /// </summary>
-        public void Terminate(Context context);
-    }
 }

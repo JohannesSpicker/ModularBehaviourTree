@@ -1,4 +1,6 @@
-﻿namespace ModularBehaviourTree
+﻿using ModularBehaviourTree.Iterators;
+
+namespace ModularBehaviourTree
 {
     /// <summary>
     ///     Conditions are also leaf nodes in the tree and are the tree’s primary way of checking for information in the world.
