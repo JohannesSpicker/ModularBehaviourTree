@@ -25,9 +25,9 @@ namespace ModularBehaviourTree
 
     public class Context
     {
-        public NavMeshAgent navMeshAgent;
+        public readonly NavMeshAgent navMeshAgent;
 
-        public TreeTicker treeTicker;
+        public readonly TreeTicker treeTicker;
 
         public Context(TreeTicker treeTicker, NavMeshAgent navMeshAgent)
         {

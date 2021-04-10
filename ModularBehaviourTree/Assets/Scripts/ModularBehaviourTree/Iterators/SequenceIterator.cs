@@ -7,9 +7,9 @@ namespace ModularBehaviourTree
     /// </summary>
     public class SequenceIterator : IBehaviour
     {
-        private   IBehaviour activeIterator;
-        private   int        cursor;
-        protected Node[]     nodes;
+        private readonly Node[]     nodes;
+        private          IBehaviour activeIterator;
+        private          int        cursor;
         public SequenceIterator(Node[] nodes) { this.nodes = nodes; }
 
         public void Initialise(Context context)
@@ -46,6 +46,6 @@ namespace ModularBehaviourTree
                 }
         }
 
-        public void Terminate(Context context) {}
+        public void Terminate(Context context) { }
     }
 }

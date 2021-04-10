@@ -16,5 +16,7 @@ namespace ModularBehaviourTree
     public abstract class Composite : Node
     {
         [SerializeField] protected Node[] nodes;
+
+        public void SetNodes(Node[] newNodes) => nodes = newNodes;
     }
 }
