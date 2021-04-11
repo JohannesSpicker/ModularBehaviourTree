@@ -1,6 +1,4 @@
-﻿using ModularBehaviourTree.Iterators;
-
-namespace ModularBehaviourTree
+﻿namespace ModularBehaviourTree
 {
     /// <summary>
     ///     Conditions are also leaf nodes in the tree and are the tree’s primary way of checking for information in the world.
@@ -15,10 +13,8 @@ namespace ModularBehaviourTree
     /// </summary>
     public abstract class Condition : Node
     {
-        public override IBehaviour CreateIterator() => new OneIterator(this);
-
         protected abstract bool Check(Context context);
 
-        public override NodeState Tick(Context context) => Check(context) ? NodeState.Success : NodeState.Failure;
+        protected override NodeState Continue(Context context) => Check(context) ? NodeState.Success : NodeState.Failure;
     }
 }

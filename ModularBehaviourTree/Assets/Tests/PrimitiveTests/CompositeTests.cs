@@ -9,44 +9,45 @@ namespace Tests.PrimitiveTests
     public class CompositeTests
     {
         [Test]
-        public void SomeSequenceTest([Values(1, 2, 3)] int counter)
+        public void SequenceShouldReturnRunningOnFirstThreeTicks([Values(0, 1, 2)] int extraTicks)
         {
             Setup(out Context context, out Sequence sequence);
 
-            IBehaviour iterator = sequence.CreateIterator();
+            for (int i = 0; i < extraTicks; i++)
+                sequence.Tick(context);
 
-            iterator.Initialise(context);
+            Assert.True(sequence.Tick(context) == Node.NodeState.Running);
 
-            for (int i = 0; i < counter; i++)
-            {
-                Assert.True(iterator.Tick(context) == Node.NodeState.Running);
-                Assert.True(iterator.Tick(context) == Node.NodeState.Success);
-            }
+            CleanUp(context);
+        }
 
-            CleanUp(context, sequence);
+        [Test]
+        public void SequenceShouldReturnSuccessOnFourthTick()
+        {
+            Setup(out Context context, out Sequence sequence);
+
+            for (int i = 0; i < 3; i++)
+                sequence.Tick(context);
+
+            Assert.True(sequence.Tick(context) == Node.NodeState.Success);
+
+            CleanUp(context);
         }
 
         private static void Setup(out Context context, out Sequence sequence)
         {
-            sequence = ScriptableObject.CreateInstance<Sequence>();
-
             Node[] nodes = new Node[3]
             {
-                ScriptableObject.CreateInstance<BehaviourTreeTests.MockLeaf>(),
-                ScriptableObject.CreateInstance<BehaviourTreeTests.MockLeaf>(),
-                ScriptableObject.CreateInstance<BehaviourTreeTests.MockLeaf>()
+                new BehaviourTreeTests.MockLeaf(), new BehaviourTreeTests.MockLeaf(),
+                new BehaviourTreeTests.MockLeaf()
             };
 
-            sequence.SetNodes(nodes);
+            sequence = new Sequence(nodes);
 
             GameObject gameObject = new GameObject();
             context = new Context(gameObject.AddComponent<TreeTicker>(), gameObject.GetComponent<NavMeshAgent>());
         }
 
-        private static void CleanUp(Context context, Object it)
-        {
-            Object.DestroyImmediate(context.treeTicker.gameObject);
-            Object.DestroyImmediate(it);
-        }
+        private static void CleanUp(Context context) => Object.DestroyImmediate(context.treeTicker.gameObject);
     }
 }

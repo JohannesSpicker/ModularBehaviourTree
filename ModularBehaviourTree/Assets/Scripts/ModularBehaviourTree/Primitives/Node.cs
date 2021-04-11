@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace ModularBehaviourTree
+﻿namespace ModularBehaviourTree
 {
     //[CreateAssetMenu(fileName = "FILENAME", menuName = "MENUNAME", order = 0)]
     /// <summary>
@@ -26,7 +24,7 @@ namespace ModularBehaviourTree
     ///     define the flow of the tree, to provide a sequence of events and different execution paths down the tree to make
     ///     sure the AI behaves as desired.
     /// </summary>
-    public abstract class Node : ScriptableObject, IBehaviour
+    public abstract class Node : IBehaviour
     {
         public enum NodeState
         {
@@ -35,10 +33,34 @@ namespace ModularBehaviourTree
             Success
         }
 
-        public abstract void      Initialise(Context context);
-        public virtual  NodeState Tick(Context       context) => NodeState.Failure;
-        public abstract void      Terminate(Context  context);
-        
-        public abstract IBehaviour CreateIterator();
+        private NodeState state;
+
+        public NodeState Tick(Context context)
+        {
+            if (state != NodeState.Running)
+                Initialise(context);
+
+            state = Continue(context);
+
+            if (state != NodeState.Running)
+                Terminate(context);
+
+            return state;
+        }
+
+        /// <summary>
+        ///     Called once immediately before first tick.
+        /// </summary>
+        protected abstract void Initialise(Context context);
+
+        /// <summary>
+        ///     Called exactly once each tree tick until returns not Running.
+        /// </summary>
+        protected abstract NodeState Continue(Context context);
+
+        /// <summary>
+        ///     Called once immediately after Tick returns not Running.
+        /// </summary>
+        protected abstract void Terminate(Context context);
     }
 }

@@ -34,16 +34,13 @@ namespace Tests.PrimitiveTests
 
         private static void Setup(out Context context, out BehaviourTreeTests.MockLeaf leaf)
         {
-            leaf = ScriptableObject.CreateInstance<BehaviourTreeTests.MockLeaf>();
+            leaf = new BehaviourTreeTests.MockLeaf();
 
             GameObject gameObject = new GameObject();
             context = new Context(gameObject.AddComponent<TreeTicker>(), gameObject.GetComponent<NavMeshAgent>());
         }
 
-        private static void CleanUp(Context context, BehaviourTreeTests.MockLeaf leaf)
-        {
+        private static void CleanUp(Context context, BehaviourTreeTests.MockLeaf leaf) =>
             Object.DestroyImmediate(context.treeTicker.gameObject);
-            Object.DestroyImmediate(leaf);
-        }
     }
 }

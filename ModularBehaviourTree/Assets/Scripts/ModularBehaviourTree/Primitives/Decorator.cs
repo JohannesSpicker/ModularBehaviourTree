@@ -1,6 +1,4 @@
-﻿using System;
-using ModularBehaviourTree.Iterators;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ModularBehaviourTree
 {
@@ -16,8 +14,6 @@ namespace ModularBehaviourTree
     {
         [SerializeField] protected Node node;
 
-        public override IBehaviour CreateIterator()            => new OneIterator(this);
-        public override void      Initialise(Context context) => node.Initialise(context);
-        public override NodeState Tick(Context       context) => node.Tick(context);
+        protected override NodeState Continue(Context context) => node.Tick(context);
     }
 }

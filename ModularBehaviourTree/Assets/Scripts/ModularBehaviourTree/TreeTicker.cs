@@ -16,8 +16,8 @@ namespace ModularBehaviourTree
 
         private void Start()
         {
-            iterator = startingTree.CreateIterator();
-            iterator.Initialise(context);
+            //TODO: construct a tree, exchange iterator with tree
+            // iterator = startingTree.CreateIterator();
         }
 
         private void Update() => iterator.Tick(context);

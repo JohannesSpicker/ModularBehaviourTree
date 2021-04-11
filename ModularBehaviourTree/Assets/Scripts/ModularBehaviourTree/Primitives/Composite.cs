@@ -15,8 +15,11 @@ namespace ModularBehaviourTree
     /// </summary>
     public abstract class Composite : Node
     {
+        protected                  int    cursor;
         [SerializeField] protected Node[] nodes;
+        protected Composite(Node[] nodes) { this.nodes = nodes; }
 
-        public void SetNodes(Node[] newNodes) => nodes = newNodes;
+        protected override void Initialise(Context context) => cursor = 0;
+        protected override void Terminate(Context  context) { }
     }
 }
