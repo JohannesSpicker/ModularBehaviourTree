@@ -14,14 +14,14 @@ namespace Tests.PrimitiveTests
             //Setup();
         }
 
-        private static void Setup(out Context context, out MockDecorator decorator)
+        private static void Setup(out Blackboard blackboard, out MockDecorator decorator)
         {
             decorator = new MockDecorator(new MockPrimitives.MockLeaf());
 
             GameObject gameObject = new GameObject();
-            context = new Context(gameObject.AddComponent<TreeTicker>(), gameObject.AddComponent<NavMeshAgent>(), gameObject.transform);
+            blackboard = new Blackboard(gameObject.AddComponent<TreeTicker>(), gameObject.AddComponent<NavMeshAgent>(), gameObject.transform);
         }
 
-        private static void CleanUp(Context context) => Object.DestroyImmediate(context.treeTicker.gameObject);
+        private static void CleanUp(Blackboard blackboard) => Object.DestroyImmediate(blackboard.treeTicker.gameObject);
     }
 }

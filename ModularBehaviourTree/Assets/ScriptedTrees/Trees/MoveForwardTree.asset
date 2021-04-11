@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a29a3112dd469186aee1c84b9133cc, type: 3}
-  m_Name: Idle
+  m_Script: {fileID: 11500000, guid: 04b66132666640eabfebed1e320a007e, type: 3}
+  m_Name: MoveForwardTree
   m_EditorClassIdentifier: 
-  duration: 1
+  nodeFactories:
+  - {fileID: 11400000, guid: 131bf05437130584b9269438f5d6b2e8, type: 2}
+  - {fileID: 11400000, guid: b2d08a789242f6e4898f47f98239fd3f, type: 2}

@@ -14,6 +14,6 @@ namespace ModularBehaviourTree
     {
         protected Node node;
         protected Decorator(Node                      node) { this.node = node; }
-        protected override NodeState Continue(Context context) => node.Tick(context);
+        protected override NodeState Continue(Blackboard blackboard) => node.Tick(blackboard);
     }
 }

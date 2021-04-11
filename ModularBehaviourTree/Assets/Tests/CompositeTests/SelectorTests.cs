@@ -12,7 +12,7 @@ namespace Tests.PrimitiveTests
         [Test]
         public void SelectorShouldReturnRunningOnFirstTick()
         {
-            Setup(out Context context, out Selector sequence);
+            Setup(out Blackboard context, out Selector sequence);
 
             Assert.True(sequence.Tick(context) == Node.NodeState.Running);
 
@@ -22,7 +22,7 @@ namespace Tests.PrimitiveTests
         [Test]
         public void SelectorShouldReturnSuccessOnSecondTick()
         {
-            Setup(out Context context, out Selector sequence);
+            Setup(out Blackboard context, out Selector sequence);
 
             sequence.Tick(context);
 
@@ -31,7 +31,7 @@ namespace Tests.PrimitiveTests
             CleanUp(context);
         }
 
-        private static void Setup(out Context context, out Selector sequence)
+        private static void Setup(out Blackboard blackboard, out Selector sequence)
         {
             sequence = new Selector(new Node[3]
             {
@@ -40,9 +40,9 @@ namespace Tests.PrimitiveTests
             });
 
             GameObject gameObject = new GameObject();
-            context = new Context(gameObject.AddComponent<TreeTicker>(), gameObject.GetComponent<NavMeshAgent>(), gameObject.transform);
+            blackboard = new Blackboard(gameObject.AddComponent<TreeTicker>(), gameObject.GetComponent<NavMeshAgent>(), gameObject.transform);
         }
 
-        private static void CleanUp(Context context) => Object.DestroyImmediate(context.treeTicker.gameObject);
+        private static void CleanUp(Blackboard blackboard) => Object.DestroyImmediate(blackboard.treeTicker.gameObject);
     }
 }

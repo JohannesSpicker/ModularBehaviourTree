@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ModularBehaviourTree.Core.Conditions
+namespace ModularBehaviourTree.Conditions
 {
     public class IsInRange : Condition
     {
@@ -8,11 +8,11 @@ namespace ModularBehaviourTree.Core.Conditions
 
         public IsInRange(float range) { this.range = range; }
 
-        protected override void Initialise(Context context) { }
-        protected override void Terminate(Context  context) { }
+        protected override void Initialise(Blackboard blackboard) { }
+        protected override void Terminate(Blackboard  blackboard) { }
 
-        protected override bool Check(Context context) => context.target != null
-                                                          && Vector3.Distance(context.treeTicker.transform.position,
-                                                                              context.target.position) < range;
+        protected override bool Check(Blackboard blackboard) => blackboard.target != null
+                                                          && Vector3.Distance(blackboard.treeTicker.transform.position,
+                                                                              blackboard.target.position) < range;
     }
 }

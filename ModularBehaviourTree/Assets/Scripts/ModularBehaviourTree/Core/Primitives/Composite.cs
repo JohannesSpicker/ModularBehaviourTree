@@ -19,7 +19,7 @@ namespace ModularBehaviourTree
         [SerializeField] protected Node[] nodes;
         public Composite(Node[] nodes) { this.nodes = nodes; }
 
-        protected override void Initialise(Context context) => cursor = 0;
-        protected override void Terminate(Context  context) { }
+        protected override void Initialise(Blackboard blackboard) => cursor = 0;
+        protected override void Terminate(Blackboard  blackboard) { }
     }
 }

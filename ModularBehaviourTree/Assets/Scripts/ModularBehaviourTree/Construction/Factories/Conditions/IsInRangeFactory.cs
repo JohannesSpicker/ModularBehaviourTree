@@ -1,4 +1,4 @@
-﻿using ModularBehaviourTree.Core.Conditions;
+﻿using ModularBehaviourTree.Conditions;
 using UnityEngine;
 
 namespace ModularBehaviourTree.Construction.Factories.Conditions

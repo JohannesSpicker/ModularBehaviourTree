@@ -11,7 +11,7 @@ namespace Tests.PrimitiveTests
         [Test]
         public void FirstTickIsRunning()
         {
-            Setup(out Context context, out MockPrimitives.MockLeaf leaf);
+            Setup(out Blackboard context, out MockPrimitives.MockLeaf leaf);
 
             Node.NodeState state = leaf.Tick(context);
 
@@ -23,7 +23,7 @@ namespace Tests.PrimitiveTests
         [Test]
         public void SecondTickIsSuccess()
         {
-            Setup(out Context context, out MockPrimitives.MockLeaf leaf);
+            Setup(out Blackboard context, out MockPrimitives.MockLeaf leaf);
 
             leaf.Tick(context);
             Node.NodeState state = leaf.Tick(context);
@@ -33,15 +33,15 @@ namespace Tests.PrimitiveTests
             CleanUp(context, leaf);
         }
 
-        private static void Setup(out Context context, out MockPrimitives.MockLeaf leaf)
+        private static void Setup(out Blackboard blackboard, out MockPrimitives.MockLeaf leaf)
         {
             leaf = new MockPrimitives.MockLeaf();
 
             GameObject gameObject = new GameObject();
-            context = new Context(gameObject.AddComponent<TreeTicker>(), gameObject.GetComponent<NavMeshAgent>(), gameObject.transform);
+            blackboard = new Blackboard(gameObject.AddComponent<TreeTicker>(), gameObject.GetComponent<NavMeshAgent>(), gameObject.transform);
         }
 
-        private static void CleanUp(Context context, MockPrimitives.MockLeaf leaf) =>
-            Object.DestroyImmediate(context.treeTicker.gameObject);
+        private static void CleanUp(Blackboard blackboard, MockPrimitives.MockLeaf leaf) =>
+            Object.DestroyImmediate(blackboard.treeTicker.gameObject);
     }
 }

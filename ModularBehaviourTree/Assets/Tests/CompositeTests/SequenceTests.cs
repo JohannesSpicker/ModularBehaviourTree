@@ -12,7 +12,7 @@ namespace Tests.PrimitiveTests
         [Test]
         public void SequenceShouldReturnRunningOnFirstThreeTicks([Values(0, 1, 2)] int extraTicks)
         {
-            Setup(out Context context, out Sequence sequence);
+            Setup(out Blackboard context, out Sequence sequence);
 
             for (int i = 0; i < extraTicks; i++)
                 sequence.Tick(context);
@@ -25,7 +25,7 @@ namespace Tests.PrimitiveTests
         [Test]
         public void SequenceShouldReturnSuccessOnFourthTick()
         {
-            Setup(out Context context, out Sequence sequence);
+            Setup(out Blackboard context, out Sequence sequence);
 
             for (int i = 0; i < 3; i++)
                 sequence.Tick(context);
@@ -35,7 +35,7 @@ namespace Tests.PrimitiveTests
             CleanUp(context);
         }
 
-        private static void Setup(out Context context, out Sequence sequence)
+        private static void Setup(out Blackboard blackboard, out Sequence sequence)
         {
             Node[] nodes = new Node[3]
             {
@@ -46,10 +46,10 @@ namespace Tests.PrimitiveTests
 
             GameObject gameObject = new GameObject();
 
-            context = new Context(gameObject.AddComponent<TreeTicker>(), gameObject.GetComponent<NavMeshAgent>(),
+            blackboard = new Blackboard(gameObject.AddComponent<TreeTicker>(), gameObject.GetComponent<NavMeshAgent>(),
                                   gameObject.transform);
         }
 
-        private static void CleanUp(Context context) => Object.DestroyImmediate(context.treeTicker.gameObject);
+        private static void CleanUp(Blackboard blackboard) => Object.DestroyImmediate(blackboard.treeTicker.gameObject);
     }
 }

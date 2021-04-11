@@ -39,15 +39,15 @@
         /// <summary>
         ///     Called exactly once each tree tick until returns Failure or Success.
         /// </summary>
-        public NodeState Tick(Context context)
+        public NodeState Tick(Blackboard blackboard)
         {
             if (state != NodeState.Running)
-                Initialise(context);
+                Initialise(blackboard);
 
-            state = Continue(context);
+            state = Continue(blackboard);
 
             if (state != NodeState.Running)
-                Terminate(context);
+                Terminate(blackboard);
 
             return state;
         }
@@ -55,16 +55,16 @@
         /// <summary>
         ///     Called once immediately before first tick.
         /// </summary>
-        protected abstract void Initialise(Context context);
+        protected abstract void Initialise(Blackboard blackboard);
 
         /// <summary>
         ///     Called exactly once each tree tick until returns not Running.
         /// </summary>
-        protected abstract NodeState Continue(Context context);
+        protected abstract NodeState Continue(Blackboard blackboard);
 
         /// <summary>
         ///     Called once immediately after Tick returns not Running.
         /// </summary>
-        protected abstract void Terminate(Context context);
+        protected abstract void Terminate(Blackboard blackboard);
     }
 }

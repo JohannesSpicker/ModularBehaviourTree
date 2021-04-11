@@ -4,11 +4,11 @@
     {
         internal Selector(Node[] nodes) : base(nodes) { }
 
-        protected override NodeState Continue(Context context)
+        protected override NodeState Continue(Blackboard blackboard)
         {
             for (; cursor < nodes.Length; cursor++)
             {
-                NodeState childState = nodes[cursor].Tick(context);
+                NodeState childState = nodes[cursor].Tick(blackboard);
 
                 if (childState != NodeState.Failure)
                     return childState;

@@ -5,11 +5,11 @@ namespace ModularBehaviourTree.Core.Decorators
     internal class Inverter : Decorator
     {
         public Inverter(Node                       node) : base(node) { }
-        protected override void Initialise(Context context) { }
+        protected override void Initialise(Blackboard blackboard) { }
 
-        protected override NodeState Continue(Context context)
+        protected override NodeState Continue(Blackboard blackboard)
         {
-            NodeState childState = base.Continue(context);
+            NodeState childState = base.Continue(blackboard);
 
             switch (childState)
             {
@@ -20,6 +20,6 @@ namespace ModularBehaviourTree.Core.Decorators
             }
         }
 
-        protected override void Terminate(Context context) { }
+        protected override void Terminate(Blackboard blackboard) { }
     }
 }

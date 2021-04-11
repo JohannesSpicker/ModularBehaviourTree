@@ -9,15 +9,15 @@ namespace ModularBehaviourTree.Leaves
         private Ticker ticker;
 
         public Idle(float                               duration) { ticker = new Ticker(duration); }
-        protected override void      Initialise(Context context) => ticker.Reset();
+        protected override void      Initialise(Blackboard blackboard) => ticker.Reset();
 
-        protected override NodeState Continue(Context context)
+        protected override NodeState Continue(Blackboard blackboard)
         {
             if (ticker.Tick(Time.deltaTime))
                 return NodeState.Success;
 
             return NodeState.Running;
         }
-        protected override void      Terminate(Context  context) {}
+        protected override void      Terminate(Blackboard  blackboard) {}
     }
 }

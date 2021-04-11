@@ -11,15 +11,15 @@ namespace TreeTickerSpace
         [SerializeField] private NodeFactory nodeFactory;
         private                  Node        behaviourTree;
 
-        private Context context;
+        private Blackboard blackboard;
 
         private void Awake()
         {
-            context = new Context(this, gameObject.GetComponent<NavMeshAgent>(), transform);
+            blackboard = new Blackboard(this, GetComponent<NavMeshAgent>(), transform);
 
             behaviourTree = nodeFactory.CreateNode();
         }
 
-        private void Update() => behaviourTree.Tick(context);
+        private void Update() => behaviourTree.Tick(blackboard);
     }
 }
