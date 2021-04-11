@@ -1,5 +1,6 @@
 ﻿using ModularBehaviourTree;
 using NUnit.Framework;
+using TreeTickerSpace;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,7 +11,7 @@ namespace Tests.PrimitiveTests
         [Test]
         public void FirstTickIsRunning()
         {
-            Setup(out Context context, out BehaviourTreeTests.MockLeaf leaf);
+            Setup(out Context context, out MockPrimitives.MockLeaf leaf);
 
             Node.NodeState state = leaf.Tick(context);
 
@@ -22,7 +23,7 @@ namespace Tests.PrimitiveTests
         [Test]
         public void SecondTickIsSuccess()
         {
-            Setup(out Context context, out BehaviourTreeTests.MockLeaf leaf);
+            Setup(out Context context, out MockPrimitives.MockLeaf leaf);
 
             leaf.Tick(context);
             Node.NodeState state = leaf.Tick(context);
@@ -32,15 +33,15 @@ namespace Tests.PrimitiveTests
             CleanUp(context, leaf);
         }
 
-        private static void Setup(out Context context, out BehaviourTreeTests.MockLeaf leaf)
+        private static void Setup(out Context context, out MockPrimitives.MockLeaf leaf)
         {
-            leaf = new BehaviourTreeTests.MockLeaf();
+            leaf = new MockPrimitives.MockLeaf();
 
             GameObject gameObject = new GameObject();
-            context = new Context(gameObject.AddComponent<TreeTicker>(), gameObject.GetComponent<NavMeshAgent>());
+            context = new Context(gameObject.AddComponent<TreeTicker>(), gameObject.GetComponent<NavMeshAgent>(), gameObject.transform);
         }
 
-        private static void CleanUp(Context context, BehaviourTreeTests.MockLeaf leaf) =>
+        private static void CleanUp(Context context, MockPrimitives.MockLeaf leaf) =>
             Object.DestroyImmediate(context.treeTicker.gameObject);
     }
 }
