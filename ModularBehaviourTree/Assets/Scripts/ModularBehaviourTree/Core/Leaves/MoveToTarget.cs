@@ -11,7 +11,7 @@ namespace ModularBehaviourTree.Leaves
         protected override void Initialise(Blackboard blackboard)
         {
             if (HasTarget(blackboard))
-                blackboard.navMeshAgent.SetDestination(blackboard.target.position);
+                blackboard.navigation.SetDestination(blackboard.target.position);
         }
 
         protected override NodeState Continue(Blackboard blackboard)

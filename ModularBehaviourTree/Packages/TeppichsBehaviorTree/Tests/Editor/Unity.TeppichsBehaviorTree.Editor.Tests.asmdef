@@ -1,0 +1,16 @@
+{
+    "name": "Unity.TeppichsBehaviorTree.Editor.Tests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9bddb2e8a8f89a445a91c596198dfa71"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
