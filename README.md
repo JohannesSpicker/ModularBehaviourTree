@@ -7,4 +7,4 @@ Feature goals:
 - GameObjects that run a tree
 
 Also thinking about:
-- Tree construction via code
+- Tree construction via code/visual nodes
